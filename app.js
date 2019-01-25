@@ -4,7 +4,8 @@ var exphbs = require('express-handlebars');
 
 let reviews = [
     { title: "Great Review", movieTitle: "Batman II" },
-    { title: "Awesome Movie", movieTitle: "Titanic" }
+    { title: "Awesome Movie", movieTitle: "Titanic" },
+    { title: "Erica is awesome!", movieTitle: "Erica's World" }
 ]
 
 // INDEX
