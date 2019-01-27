@@ -25,13 +25,14 @@ app.get('/reviews/:id', (req, res) => {
     }).catch((err) => {
         console.log(err.message);
     })
-})
+});
 
 const Review = mongoose.model('Review', {
     title: String,
     description: String,
     movieTitle: String
 });
+//users can commit meaningful reviews
 
 // let reviews = [
 //     { title: "Great Review", movieTitle: "Batman II" },
