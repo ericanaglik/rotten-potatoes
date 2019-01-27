@@ -20,8 +20,12 @@ app.post('/reviews', (req, res) => {
 
 // SHOW
 app.get('/reviews/:id', (req, res) => {
-    res.send('I\'m a review')
-});
+    Review.findById(req.params.id).then((review) => {
+        res.render('reviews-show', { review: review })
+    }).catch((err) => {
+        console.log(err.message);
+    })
+})
 
 const Review = mongoose.model('Review', {
     title: String,
@@ -44,7 +48,7 @@ app.get('/', (req, res) => {
         .catch(err => {
             console.log(err);
         })
-})
+});
 
 // NEW
 app.get('/reviews/new', (req, res) => {
