@@ -16,7 +16,12 @@ app.post('/reviews', (req, res) => {
     }).catch((err) => {
         console.log(err.message);
     })
-})
+});
+
+// SHOW
+app.get('/reviews/:id', (req, res) => {
+    res.send('I\'m a review')
+});
 
 const Review = mongoose.model('Review', {
     title: String,
@@ -51,9 +56,9 @@ app.get('/reviews/new', (req, res) => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-app.get('/', (req,res) => {
-    res.render('home', { msg: 'Handlebars are Cool!' });
-})
+// app.get('/', (req,res) => {
+//     res.render('home', { msg: 'Handlebars are Cool!' });
+// })
 
 app.listen(3000, () => {
     console.log('App listening on port 3000!')
