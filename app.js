@@ -1,17 +1,32 @@
 const express = require('express')
 const app = express()
 var exphbs = require('express-handlebars');
+const mongoose = requre('mongoose');
+mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true });
 
-let reviews = [
-    { title: "Great Review", movieTitle: "Batman II" },
-    { title: "Awesome Movie", movieTitle: "Titanic" },
-    { title: "Erica is awesome!", movieTitle: "Erica's World" }
-]
+const Review = mongoose.model('Review', {
+    title: String,
+    movieTitle: String
+});
+
+// let reviews = [
+//     { title: "Great Review", movieTitle: "Batman II" },
+//     { title: "Awesome Movie", movieTitle: "Titanic" },
+//     { title: "Erica is awesome!", movieTitle: "Erica's World" }
+// ]
 
 // INDEX
 app.get('/', (req, res) => {
-    res.render('reviews-index', { reviews: reviews });
+    Review.find()
+        .then(reviews => {
+            res.render('reviews-index', { reviews: reviews });
+        })
+        .catch(err => {
+            console.log(err);
+        })
 })
+
+
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
