@@ -27,6 +27,13 @@ app.get('/reviews/:id', (req, res) => {
     })
 });
 
+// EDIT
+app.get('/reviews/:id/edit', (req, res) => {
+  Review.findById(req.params.id, function(err, review) {
+    res.render('reviews-edit', {review: review});
+  })
+})
+
 const Review = mongoose.model('Review', {
     title: String,
     description: String,
