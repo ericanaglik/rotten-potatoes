@@ -1,4 +1,6 @@
+require('method-override')
 const express = require('express')
+const methodOverride = require('method-override')
 const app = express()
 var exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
@@ -7,6 +9,20 @@ mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true 
 const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// override with POST having ?_method=DELETE or ?_method=PUT
+app.use(methodOverride('_method'))
+
+// UPDATE
+app.put('/reviews/:id', (req, res) => {
+  Review.findByIdAndUpdate(req.params.id, req.body)
+    .then(review => {
+      res.redirect(`/reviews/${review._id}`)
+    })
+    .catch(err => {
+      console.log(err.message)
+    })
+})
 
 // CREATE
 app.post('/reviews', (req, res) => {
