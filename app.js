@@ -1,5 +1,6 @@
 require('method-override')
 const express = require('express')
+const reviews = require('./controllers/reviews')(app, Review);
 const methodOverride = require('method-override')
 const app = express()
 var exphbs = require('express-handlebars');
