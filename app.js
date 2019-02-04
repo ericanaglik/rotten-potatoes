@@ -13,6 +13,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // override with POST having ?_method=DELETE or ?_method=PUT
 app.use(methodOverride('_method'))
 
+// DELETE
+app.delete('/reviews/:id', function (req, res) {
+    console.log("DELETE review")
+    Review.findByIdAndRemove(req.params.id).then((review) => {
+        res.redirect('/');
+    }).catch((err) => {
+        console.log(err.message);
+    })
+})
+
 // UPDATE
 app.put('/reviews/:id', (req, res) => {
   Review.findByIdAndUpdate(req.params.id, req.body)
