@@ -9,6 +9,8 @@ mongoose.connect('mongodb://localhost/rotten-potatoes', { useNewUrlParser: true 
 // INITIALIZE BODY-PARSER AND ADD IT TO APP
 const bodyParser = require('body-parser');
 
+module.exports = app;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // override with POST having ?_method=DELETE or ?_method=PUT
