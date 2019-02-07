@@ -1,4 +1,6 @@
 // reviews.js
+const Review = require('../models/review');
+module.exports = function(app) {
 
 module.exports = function(app, Review) {
 
